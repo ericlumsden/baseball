@@ -1,6 +1,7 @@
 import pybaseball
 import pandas as pd
-import numpy as np
+
+# Load hitters data from csv; split names and data types for id gathering
 
 hitters = pd.read_csv('gather_hitters.csv')
 hitters[['First','Last']] = hitters['Name'].str.split(' ',1,expand=True)
@@ -10,12 +11,17 @@ hitters['bbref_id'] = pd.Series(dtype='str')
 hitters['fangraphs_id'] = pd.Series(dtype='int')
 hitters['first_played'] = pd.Series(dtype='int')
 hitters['last_played'] = pd.Series(dtype='int')
+
 '''
+
+Example from pybaseball github on gathering ids:
 pid = pybaseball.playerid_lookup('kershaw', 'clayton')
 print(pid)
 print(pid.key_bbref.item())
 
 '''
+
+# Iterate over dataframe to gather first & last names and then get their ids
 for idx, row in hitters.iterrows():
     first = str(row['First'])
     last = str(row['Last'])
@@ -33,5 +39,6 @@ for idx, row in hitters.iterrows():
     else:
         continue
 
-hitters.to_csv(gather_stats.csv)
+# Save the updated dataframe to a new csv file
+hitters.to_csv('gather_ids.csv')
 print(hitters.head())
