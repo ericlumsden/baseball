@@ -3,7 +3,7 @@
 
 There have been long-standing questions around the best way to sort and group MLB hitters. Scouts use the 20-80 hit tool metric, [explained wonderfully by Kiley McDaniel on Fangraphs](https://blogs.fangraphs.com/scouting-explained-the-20-80-scouting-scale/); Bill James tried to place hitters into families based on their extra-base hits (XBH) ratios and OPS and ended up with [96 different families](https://www.billjamesonline.com/article785/); finally, Jonah Simon used [hierarchical clustering](https://medium.com/analytics-vidhya/grouping-major-league-hitters-with-hierarchical-methods-e7dc35b7f665) to group hitters from the 2019 season. I believe there are aspects of these approaches that could be combined to develop more accurate metrics/families/clusters of hitters and in this project I attempted to do just that.
 
-This blog entry details the entire project and gives a step-by-step guide of how I collected, cleaned and analyzed the data. If you are only interested in the results, you can see my webpage with an interactive version of the data. If you are interested in my process, keep reading. All of my scripts and resulting data files and figures are available in the grouping_hitters folder in my [baseball repository](https://github.com/ericlumsden/baseball) on my github page.
+This blog entry details the entire project and gives a step-by-step guide of how I collected, cleaned and analyzed the data. If you are only interested in the results, you can see [my webpage with an interactive version]() of the data. If you are interested in my process, keep reading. All of my scripts and resulting data files and figures are available in the grouping_hitters folder in my [baseball repository](https://github.com/ericlumsden/baseball) on my github page.
 
 ####Collecting the data
 
@@ -53,3 +53,8 @@ df_noIDs = df_noIDs[['First','Last']]
 ...and went through each individually identifying their correct ID values and adding them into the original dataframe. Luckily, there were only 34 players missing their IDs, so it did not take as long as it could have. Plus, once I had written out the lines for the first player, it was mostly cut-and-paste. This work was done in my 'clean_hitterids.py' script.
 
 Once the IDs were all squared away it was time to collect the advanced metrics via statcast.
+
+WHAT ABOUT LOOKING AT SWING_MISS V SWING_HIT RATES FOR ALL DIFFERENT PITCH TYPES? COULD BE A WAY TO FURTHER REFINE EACH GROUP
+
+####Notes of reflection
+*My naming conventions do not coincide with best practices; this is something I will try to improve moving forward
