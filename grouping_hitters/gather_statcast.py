@@ -75,16 +75,12 @@ for idx, row in df.iterrows():
     df.at[idx, 'bbType_lineDrive'] = lineDriveRate
     df.at[idx, 'bbType_popUp'] = popUpRate
 
-''' I first attempted to include the launch speed and angle stats here but it didn't work...
-... I will leave all of this in for completeness, but will have to try a different way to incorporate this data...
-... which will be in the gather_launch.py file
-    try:
+    try: # This part did not work for all hitters as many had NaNs for these values; almost certainly from hitters pre collection of this data... hopefully I got enough...
         df.at[idx, 'launch_speed_median'] = stats['launch_speed'].median()
         df.at[idx, 'launch_speed_mean'] = stats['launch_speed'].mean()
         df.at[idx, 'launch_angle_median'] = stats['launch_angle'].median()
         df.at[idx, 'launch_angle_mean'] = stats['launch_angle'].mean()
     except:
         continue
-'''
 
 df.to_csv('gather_statcast.csv')
