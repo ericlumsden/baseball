@@ -1,0 +1,7 @@
+- Hitter groupings [svd, clustering]
+- Anemic starts
+- Pitch tipping
+- Batting approach (decision tree for looking-up pitcher's general approach that spits out how to approach an at-bat (aggressive v patient; look elevated v low; etc.))
+
+- Learning ML & AI Approaches Through Baseball [book]
+	Chapter ideas: regression, clustering, multi-dimensional reduction, NNs?, general linear algebra?
