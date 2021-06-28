@@ -35,13 +35,13 @@ for s in sig_all:
 s_trunc_median_count = 0
 s_trunc_median_list = []
 for s in sig_median:
-    s_trunc_running_count += s
+    s_trunc_median_count += s
     s_trunc_median_list.append(s_trunc_median_count / np.sum(sig_median))
 
 s_trunc_mean_count = 0
 s_trunc_mean_list = []
 for s in sig_mean:
-    s_trunc_running_count += s
+    s_trunc_mean_count += s
     s_trunc_mean_list.append(s_trunc_mean_count / np.sum(sig_mean))
 
 plt.figure(1)
@@ -52,21 +52,37 @@ plt.xlabel('s#')
 plt.ylabel('% variance explained')
 plt.title('comparing % variance')
 plt.legend()
+plt.savefig('./figs/var_explained.png')
 
 # Now, I want to look at the scatters of each projection
 V_r_all = v_all[:,:2]
-V_r_trunc = v_trunc[:,:2]
+V_r_median = v_median[:,:2]
+V_r_mean = v_mean[:,:2]
 
 a_all = np.matmul(all_array[:,12:].astype(float), V_r_all)
-a_median = np.matmul(statcast_array[:,12:].astype(float), V_r_median)
-a_mean = np.matmul(statcast_array[:,12:].astype(float), V_r_mean)
+a_median = np.matmul(statcast_array_median[:,12:].astype(float), V_r_median)
+a_mean = np.matmul(statcast_array_mean[:,12:].astype(float), V_r_mean)
 
 plt.figure(2)
 plt.plot(a_all[:,0], a_all[:,1], '.k')
+plt.title('projection - all')
+plt.xlabel('p1')
+plt.ylabel('p2')
+plt.savefig('./figs/projection_all.png')
 
 plt.figure(3)
 plt.plot(a_median[:,0], a_median[:,1], '.k')
+plt.title('projection - median')
+plt.xlabel('p1')
+plt.xlabel('p1')
+plt.ylabel('p2')
+plt.savefig('./figs/projection_median.png')
 
 plt.figure(4)
 plt.plot(a_mean[:,0], a_mean[:,1], '.k')
+plt.title('projection - mean')
+plt.xlabel('p1')
+plt.ylabel('p2')
+plt.savefig('./figs/projection_mean.png')
+
 plt.show()
