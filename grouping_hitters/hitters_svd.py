@@ -18,23 +18,41 @@ all_array = df_all.to_numpy()
 statcast_array = df_trunc.to_numpy()
 
 # Then run the SVDs! Just on the columns 12+ (bbType_flyBall onward)
-u_all, sig_all, v_all = np.linalg.svd(df_all[:, 12:])
-u_trunc, sig_trunc, v_trunc = np.linalg.svd(df_trunc[:, 12:])
+u_all, sig_all, v_all = np.linalg.svd(all_array[:, 12:].astype(float))
+u_trunc, sig_trunc, v_trunc = np.linalg.svd(statcast_array[:, 12:].astype(float))
 
-plt.figure(0)
+# Now, will make lists of the sigma values for the two approaches to graph and compare
 s_all_running_count = 0
-x_count = 0
+s_all_list = []
 for s in sig_all:
     s_all_running_count += s
-    x_count += 1
-    plt.plot(x_count, s_all_running_count)
+    s_all_list.append(s_all_running_count / np.sum(sig_all))
+
+s_trunc_running_count = 0
+s_trunc_list = []
+for s in sig_trunc:
+    s_trunc_running_count += s
+    s_trunc_list.append(s_trunc_running_count / np.sum(sig_trunc))
 
 plt.figure(1)
+plt.plot(range(len(s_all_list)), s_all_list, c='k', label='All Players')
+plt.plot(range(len(s_trunc_list)), s_trunc_list, c='r', label='Truncated Players')
+plt.xlabel('s#')
+plt.ylabel('% variance explained')
+plt.title('comparing % variance')
+plt.legend()
+
+# Now, I want to look at the scatters of each projection
+V_r_all = v_all[:,:2]
+V_r_trunc = v_trunc[:,:2]
+
+a_all = np.matmul(all_array[:,12:].astype(float), V_r_all)
+a_trunc = np.matmul(statcast_array[:,12:].astype(float), V_r_trunc)
 
 plt.figure(2)
-s_trunc_running_count = 0
-x_count2 = 0
-for s in sig_all:
-    s_trunc_running_count += s
-    x_count2 += 1
-    plt.plot(x_count2, s_trunc_running_count)
+plt.plot(a_all[:,0], a_all[:,1], '.k')
+
+plt.figure(3)
+plt.plot(a_trunc[:,0], a_trunc[:,1], '.k')
+
+plt.show()
