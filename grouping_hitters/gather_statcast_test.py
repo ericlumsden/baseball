@@ -7,7 +7,7 @@ It seems as if it's a matter of availability; there is launch speed and angle da
 Also, it seems as if I have added the bbType columns twice... I will drop them in this next iteration
 '''
 # Load the id dataframe and add columns for data from statcast
-df = pd.read_csv('gather_ids.csv', index_col=0)
+df = pd.read_csv('./data/gather_ids.csv', index_col=0)
 test_df = df.iloc[:2]
 
 '''

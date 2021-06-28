@@ -14,7 +14,7 @@ df_noIDs = df_noIDs[['First','Last']]
 df_noIDs.to_csv('df_noIDs.csv')
 '''
 # Loading the hitter dataframe; will ammend each individual here and then re-save and overwrite the loaded file
-df_hitters = pd.read_csv('gather_ids.csv')
+df_hitters = pd.read_csv('./data/gather_ids.csv')
 
 '''
 I have loaded each individual player missing IDs below,
@@ -359,4 +359,4 @@ df_hitters['first_played'] = np.where( ((df_hitters.First == 'Eric') & (df_hitte
 df_hitters['last_played'] = np.where( ((df_hitters.First == 'Eric') & (df_hitters.Last == 'Young Jr.')), int(eric_youngjr['mlb_played_last'].item()), df_hitters['last_played'] )
 print(df_hitters[df_hitters['Last'] == 'Young Jr.'])
 
-df_hitters.to_csv('gather_ids.csv')
+df_hitters.to_csv('./data/gather_ids.csv')

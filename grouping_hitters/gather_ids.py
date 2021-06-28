@@ -3,7 +3,7 @@ import pandas as pd
 
 # Load hitters data from csv; split names and data types for id gathering
 
-hitters = pd.read_csv('gather_hitters.csv')
+hitters = pd.read_csv('./data/gather_hitters.csv')
 hitters[['First','Last']] = hitters['Name'].str.split(' ',1,expand=True)
 hitters['mlb_id'] = pd.Series(dtype='int')
 hitters['retro_id'] = pd.Series(dtype='str')
@@ -40,5 +40,5 @@ for idx, row in hitters.iterrows():
         continue
 
 # Save the updated dataframe to a new csv file
-hitters.to_csv('gather_ids.csv')
+hitters.to_csv('./data/gather_ids.csv')
 print(hitters.head())

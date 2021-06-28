@@ -6,7 +6,7 @@ I had a typo that resulted in empty columns, so I would like to get rid of those
 I also have a number of hitters that are missing launch_speed and launch_angle stats so I would like to sort them, and have one csv with all hitters and another with complete data
 '''
 
-df = pd.read_csv('gather_statcast.csv', index_col=0)
+df = pd.read_csv('./data/gather_statcast.csv', index_col=0)
 
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 df = df.drop(['bbtype_flyBall', 'bbtype_popUp', 'bbtype_lineDrive', 'bbtype_groundBall'], axis=1)
@@ -25,5 +25,5 @@ df['SOperPA'] = df['SO'] / df['PA']
 
 df_complete = df[df['launch_speed_mean'].notna()]
 
-df.to_csv('statcast_clean_ALLHITTERS.csv')
-df_complete.to_csv('statcast_clean_TRUNCATED.csv')
+df.to_csv('./data/statcast_clean_ALLHITTERS.csv')
+df_complete.to_csv('./data/statcast_clean_TRUNCATED.csv')

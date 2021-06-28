@@ -9,4 +9,4 @@ data = pybaseball.batting_stats_range('2008-01-01', '2020-12-31')
 data = data[data.PA >= 1610]
 
 # Saving this data to a csv file for easier access
-data.to_csv('gather_hitters.csv')
+data.to_csv('./data/gather_hitters.csv')

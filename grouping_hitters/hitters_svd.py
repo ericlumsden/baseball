@@ -5,8 +5,8 @@ import seaborn
 seaborn.set(style='ticks')
 
 # First, load in the csv files as two separate dataframes
-df_all = pd.read_csv('statcast_clean_ALLHITTERS.csv', index_col=0)
-df_statcast = pd.read_csv('statcast_clean_TRUNCATED.csv', index_col=0)
+df_all = pd.read_csv('./data/statcast_clean_ALLHITTERS.csv', index_col=0)
+df_statcast = pd.read_csv('./data/statcast_clean_TRUNCATED.csv', index_col=0)
 
 # Then, select the columns I'll be using for SVD
 all_list = ['Name', 'R', '2B', '3B', 'HR', 'BB', 'IBB', 'SO', 'BA', 'OBP', 'SLG', 'OPS', 'bbType_flyBall', 'bbType_groundBall', 'bbType_lineDrive', 'bbType_popUp', '2BperPA', '3BperPA', 'HRperPA', 'BBperPA', 'IBBperPA', 'SOperPA']
@@ -57,9 +57,9 @@ plt.legend()
 plt.savefig('./figs/var_explained.png')
 
 # Now, I want to look at the scatters of each projection
-V_r_all = v_all[:,:2]
-V_r_median = v_median[:,:2]
-V_r_mean = v_mean[:,:2]
+V_r_all = v_all[:,:4]
+V_r_median = v_median[:,:4]
+V_r_mean = v_mean[:,:4]
 
 a_all = np.matmul(all_array[:,12:].astype(float), V_r_all)
 a_median = np.matmul(statcast_array_median[:,12:].astype(float), V_r_median)
@@ -74,6 +74,22 @@ a_median_df['OPS'] = df_trunc_median['OPS']
 
 a_mean_df = pd.DataFrame(a_mean[:, :2], columns=[1,2])
 a_mean_df['OPS'] = df_trunc_mean['OPS']
+
+# Add the first 4 projection columns to the respective dataframes (then be sure to save these as both csv and json files for later)
+for x in range(4):
+    df_all[f"p{x+1}"] = a_all[:,x]
+    df_trunc_median[f"p{x+1}"] = a_median[:,x]
+    df_trunc_mean[f"p{x+1}"] = a_mean[:,x]
+
+df_all.to_csv('./data/statcast_clean_ALLHITTERS_projections.csv')
+df_all.to_json('./data/statcast_clean_ALLHITTERS_projections.json')
+
+df_trunc_median.to_csv('./data/statcast_clean_TRUNCATEDmedian.csv')
+df_trunc_median.to_json('./data/statcast_clean_TRUNCATEDmedian.json')
+
+df_trunc_mean.to_csv('./data/statcast_clean_TRUNCATEDmean.csv')
+df_trunc_mean.to_json('./data/statcast_clean_TRUNCATEDmean.json')
+
 
 plt.figure(2)
 plt.plot(a_all[:,0], a_all[:,1], '.k')

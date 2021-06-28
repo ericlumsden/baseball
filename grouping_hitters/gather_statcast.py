@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Load the id dataframe and add columns for data from statcast
-df = pd.read_csv('gather_ids.csv')
+df = pd.read_csv('./data/gather_ids.csv')
 ''' 
 I was hoping to include some more descriptive stats, but these were not readily available from the statcast data...
 ... or will require some extra work that I might come back to later
@@ -83,4 +83,4 @@ for idx, row in df.iterrows():
     except:
         continue
 
-df.to_csv('gather_statcast.csv')
+df.to_csv('./data/gather_statcast.csv')
