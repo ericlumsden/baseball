@@ -34,3 +34,38 @@ Cole has primarily thrown FFs all season, but at a lower frequency compared to A
 
 ### Count-Specific Sequencing
 
+When looking at Cole's pitch preferences based on count there are a number of things that really stand out. First, looking at his pitches against Boston:
+
+1. Cole always threw a fastball when in a 3 ball count or in a 2-0 count
+2. 
+
+![Count specific pitch BOSTON](./figs/count_specific_pie_chart_boston.png)
+The above figure shows pie charts of all pitch types thrown in different counts against Boston (labels above the charts themselves). Below is the breakdown of pitch types from the entire season based on count.
+
+![Count specific pitch SEASON](./figs/count_specific_pie_chart_season.png)
+
+The trends against Boston have been present all season. Cole is reluctant to throw off-speed when in a 3 ball count. He also throws his slider quite frequently in 2 strike counts and the fewer balls the more likely he is to throw his slider. Let's now look at these breakdowns from a pitch-type point of view.
+
+As you can see below, Cole throws his off-speed pitches more frequently when ahead in the count.
+
+PITCH TYPE PIE CHARTS
+
+SANKEY DIAGRAMS OF PITCH TYPE AND COUNT
+
+MARKOV CHAIN MODELS?
+
+HEAT MAPS FOR LOCATION BASED ON PREV PITCH / COUNT / BATTER HANDEDNESS - NEED TO GET BATTER HANDEDNESS VALUES
+
+A sankey diagram provides a good way of visualizing sequential events. Below I have plotted all of Cole's pitches from August 19 in a sankey chart.
+
+![Sankey chart vs Boston August 19]("./figs/sankey_boston.png")
+This chart shows the sequencing of every at bat. The x-axis gives pitch-number and the y-axis gives pitcher's advantage in a count (+/- pitcher advantage, meaning +1 is a strike advantage; e.g. 0-1 or 1-2 count).
+
+I repeated this visualization on every at-bat against Cole, minus his recent game against Boston.
+![Sankey chart season]("./figs/sankey_season.png")
+
+### Location
+
+### Game Context
+
+### Sequences Leading to Bad Outcomes
