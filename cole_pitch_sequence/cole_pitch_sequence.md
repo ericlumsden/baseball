@@ -36,17 +36,24 @@ Cole has primarily thrown FFs all season, but at a lower frequency compared to A
 
 When looking at Cole's pitch preferences based on count there are a number of things that really stand out. First, looking at his pitches against Boston:
 
-1. Cole always threw a fastball when in a 3 ball count or in a 2-0 count
-2. 
+1. Cole always threw a fastball when in a 3 ball, 2-0 or 0-1 count
+2. Cole never threw a KC when in a 1 strike count; he seems to prefer to use that pitch early in the count or with 2 strikes on a batter
+3. 
 
 ![Count specific pitch BOSTON](./figs/count_specific_pie_chart_boston.png)
 The above figure shows pie charts of all pitch types thrown in different counts against Boston (labels above the charts themselves). Below is the breakdown of pitch types from the entire season based on count.
 
 ![Count specific pitch SEASON](./figs/count_specific_pie_chart_season.png)
 
-The trends against Boston have been present all season. Cole is reluctant to throw off-speed when in a 3 ball count. He also throws his slider quite frequently in 2 strike counts and the fewer balls the more likely he is to throw his slider. Let's now look at these breakdowns from a pitch-type point of view.
+While Cole has thrown every pitch in every count, some of the trends seen against Boston have been present all season. Cole is reluctant to throw off-speed when in a 3 ball count. He also throws his slider quite frequently in 2 strike counts and the fewer balls the more likely he is to throw his slider. 
 
-As you can see below, Cole throws his off-speed pitches more frequently when ahead in the count.
+Let's now look at these breakdowns from a pitch-type point of view. Be forewarned, part of the problem with the below analysis is that any pitcher is more likely to throw any pitch earlier in the count given that to reach deeper counts you have to first throw pitches earlier in the count, so this analysis must be paired with the above showing splits of pitch types based on the count. Having said that, looking at these splits reinforces a lot of the takeaways from before. As you can see below, Cole throws his off-speed pitches more frequently when ahead in the count.
+
+![Pitch by count BOSTON](./figs/count_specific_pie_chart_boston_by_count.png)
+
+These trends, again, followed his patterns throughout the season.
+
+![Pitch by count BOSTON](./figs/count_specific_pie_chart_season_by_count.png)
 
 PITCH TYPE PIE CHARTS
 

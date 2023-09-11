@@ -10,32 +10,30 @@ then plot the scatter from that onto the subplots...
 
 plate_hw = 0.71 #plate 1/2 width for defining strike zone horizontally (vertically will be done by batter sz_top and sz_bot)
 df = pd.read_csv('unfilteredAtBats.csv')
+df.iloc[::-1] # the dataframe is from most to least recent pitch, so I want to reverse to better order the at-bats from game to game
 df_hitters = pd.read_csv('redsox_batters.csv', names=['name', 'id'])
 pitch_type_dict = {}
 pitch_types = df['pitch_type'].unique()
 cmap = cm.get_cmap('jet')
-colors = cmap.colors
+#colors = cmap.colors
 
 for x in range(len(pitch_types)):
     pitch_type_dict[pitch_types[x]] = x
+df['markers'] = df['pitch_type'].map(pitch_type_dict)
 
 def multi_AB_game(num_abs, df_ex, name, date):
+    start_AB = df[df['pitch_number'] == 1].index.tolist()
     fig, axs = plt.subplots(nrows=1, ncols=num_abs, sharex=True, sharey=True, figsize=(15,5))
-    count = 0
-    sz_top_ls = []
-    sz_bot_ls = []
-    for index, row in df_ex.iterrows():
-        if (row['strikes'] == 0) and (row['balls'] == 0):
-            count += 1
-        sz_top_ls.append(row['sz_top'])
-        sz_bot_ls.append(row['sz_bot'])
-        ax=axs[count].scatter(row['plate_x'], row['plate_z'], marker=pitch_type_dict[row['pitch_type']], linewidths=4, c=row['release_speed'], cmap=cmap, label=f"{row['pitch_type']}")
-    if (len(sz_top_ls) != 0) & (len(sz_bot_ls) != 0):
-        sz_t = sum(sz_top_ls)/len(sz_top_ls)
-        sz_b = sum(sz_bot_ls)/len(sz_bot_ls)
-    else:
+    for n in range(len(start_AB)-1):
+        df_ex_temp = df_ex.iloc[start_AB[n]:start_AB[n+1]]
+        ax=axs[n].scatter(df_ex_temp['plate_x'], df_ex_temp['plate_z'], marker=df_ex_temp['markers'], cmap=cmap)
+    df_ex_final = df_ex.iloc[start_AB[-1]:]
+    ax=axs[num_abs].scatter(df_ex_final['plate_x'], df_ex_final['plate_z'], marker=df_ex_final['markers'], cmap=cmap)
+    sz_t = (df_ex[sz_t].sum())/len(df_ex)
+    sz_b = (df_ex[sz_b].sum())/len(df_ex)
+    if (sz_t == 0) & (sz_b == 0):
         sz_t = 3.5
-        sz_b = 3.5
+        sz_b = 1.5
     for x in range(num_abs):
         axs[x].plot([plate_hw, plate_hw], (sz_b, sz_t), color='k', alpha=0.7)
         axs[x].plot([-plate_hw, -plate_hw], (sz_b, sz_t), color='k', alpha=0.7)
